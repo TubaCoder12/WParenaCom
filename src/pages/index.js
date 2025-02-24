@@ -14,19 +14,19 @@ import Head from "next/head";
 import Navbar2 from "./Navbar2";
 
 export async function getStaticProps() {
-  const postsQuery = client.query({
-    query: gql`
-      query {
-        page(id: "69936", idType: DATABASE_ID) {
-          title
-          rankMathFocusKeyword
-          rankMathSEOScore
-          rankMathDescription
-          rankMathTitle
-        }
-      }
-    `,
-  });
+  // const postsQuery = client.query({
+  //   query: gql`
+  //     query {
+  //       page(id: "69936", idType: DATABASE_ID) {
+  //         title
+  //         rankMathFocusKeyword
+  //         rankMathSEOScore
+  //         rankMathDescription
+  //         rankMathTitle
+  //       }
+  //     }
+  //   `,
+  // });
 
   const categoriesQuery = client.query({
     query: gql`
@@ -158,8 +158,8 @@ export async function getStaticProps() {
   
 
   // Parallel fetching
-  const [posts, categories, featuredPost, popularPosts ,NewsPosts,LatestPost] = await Promise.all([
-    postsQuery,
+  const [categories, featuredPost, popularPosts ,NewsPosts,LatestPost] = await Promise.all([
+    // postsQuery,
     categoriesQuery,
     featuredPostQuery,
     popularPostsQuery,
@@ -169,7 +169,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      pageData: posts.data.page, // Pass page data here
+      // pageData: posts.data.page, // Pass page data here
       categories: categories.data.posts.nodes || [],
       featuredPost: featuredPost.data.deals.nodes,
       popularPosts: popularPosts.data.services.nodes || [],
@@ -190,9 +190,10 @@ const handleRouteClick = (route) => {
     <>
       <Head>
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet"></link>
-        <title>{pageData.rankMathTitle}</title>
-        <meta name="description" content={pageData.rankMathDescription} />
-        <meta name="keywords" content={pageData.rankMathFocusKeyword} />
+        <title>Home WP Arena</title>
+        {/* <title>{pageData.rankMathTitle}</title> */}
+        {/* <meta name="description" content={pageData.rankMathDescription} />
+        <meta name="keywords" content={pageData.rankMathFocusKeyword} /> */}
       </Head>
         
         <PostList pageData={pageData} />

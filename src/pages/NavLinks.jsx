@@ -9,14 +9,11 @@ const links = [
   { name: "Themes", href: "/Themes" },
   { name: "Advertise", href: "/sitemap" },
   { name: "Toolkit", href: "/ProService" },
-  { name: "About Us", href: "/terms" },
+  { name: "About Us", href: "/AboutUs" },
   { name: "Statistics", href: "/Statistics" },
   { name: "Advanced Search", href: "/collection" },
   { name: "Free Blog Setup", href: "/sitemap" },
-  { name: "Contact", href: "/privacy-policy" },
- 
-
-                    
+  { name: "Contact", href: "/ContactForm" },                    
 ];
 
 export default function NavLinks() {

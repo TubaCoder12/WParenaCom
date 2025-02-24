@@ -41,7 +41,7 @@ const OurTeam = () => {
                 <div className='grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-5 items-center justify-center'>
                     <div className='rounded-md overflow-hidden border-white shadow-md'>
                         <div className=''>
-                            <Image className="w-full" src="/wpa-team-zeeshan-sarwar.png" alt='Nouman S. Ghuman' height={40} width={40}/>
+                            <Image className="w-full" src="/Nouman.webp" alt='Nouman S. Ghuman' height={40} width={40}/>
                         </div>
                         <div className='py-5 px-8 bg-white h-full'>
                             <span className='text-slate-600 2xl:text-base text-sm'>Managing Director</span>
