@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { gql } from "graphql-request";
-import client from "@/lab/Client";
+import client from "@/lib/apolloClient";
 
 const Get_Deals = gql`
   query GetDeals {

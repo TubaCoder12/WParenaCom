@@ -1,10 +1,10 @@
-// client.js
 import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client';
+import config from '@/config';
+import api from '@/api';
 
-// Apollo Client setup
 const client = new ApolloClient({
   link: new HttpLink({
-    uri: 'https://stg-wparena-staging.kinsta.cloud/graphql', // replace with your GraphQL API URL
+    uri: `${config.BASE_URL}${api.graphql.endpoint}`,
   }),
   cache: new InMemoryCache(), // Cache for API responses
 });

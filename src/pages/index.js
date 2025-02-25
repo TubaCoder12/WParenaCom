@@ -1,210 +1,148 @@
-import { gql } from "@apollo/client";
-import client from "../lab/Client";
-
+import fetchGraphQLData from '@/lib/graphqlFetcher';
+import { fetchSEOData } from "@/lib/seoService";
 import FeaturedPost from "@/Component/FeaturedPost";
 import PostList from "@/Component/PostList";
-import CategoryList  from "@/Component/CategoryList";
+import CategoryList from "@/Component/CategoryList";
 import PopularPosts from "@/Component/PopularPosts";
-
 import Routes from "./Routes";
 import HostingQuiz from "./HostingQuiz";
-import Footer from "./Footer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Head from "next/head";
-import Navbar2 from "./Navbar2";
+import { useRouter } from "next/router";
 
 export async function getStaticProps() {
-  const postsQuery = client.query({
-    query: gql`
-      query {
-        page(id: "69936", idType: DATABASE_ID) {
-          title
-          rankMathFocusKeyword
-          rankMathSEOScore
-          rankMathDescription
-          rankMathTitle
-        }
-      }
-    `,
-  });
+  try {
+    const categories = await fetchGraphQLData("posts", [
+      "id",
+      "slug",
+      "title",
+      "date",
+      "excerpt",
+      "featuredImage { node { sourceUrl altText } }",
+      "author { node { name } }"
+    ], { categoryId: 9 });
+    
+    const newsPosts = await fetchGraphQLData("posts", [
+      "id",
+      "slug",
+      "title",
+      "date",
+      "excerpt",
+      "featuredImage { node { sourceUrl altText } }",
+      "author { node { name } }"
+    ], { categoryId: 990 });
 
-  const categoriesQuery = client.query({
-    query: gql`
-      query GetPostsByCategory($categoryId: Int!) {
-        posts(where: { categoryId: $categoryId }) {
-          nodes {
-            id
-            slug
-            title
-            date
-            excerpt
-            featuredImage {
-              node {
-                sourceUrl
-                altText
-              }
-            }
-            author {
-              node {
-                name
-              }
-            }
-          }
-        }
-      }
-    `,
-    variables: { categoryId: 9 },  // Example categoryId (you can change this dynamically)
-  });
-  
-  const NewsPostQuery = client.query({
-    query: gql`
-      query GetPostsByCategory($categoryId: Int!) {
-        posts(where: { categoryId: $categoryId }) {
-          nodes {
-            id
-            slug
-            title
-            date
-            excerpt
-            featuredImage {
-              node {
-                sourceUrl
-                altText
-              }
-            }
-            author {
-              node {
-                name
-              }
-            }
-          }
-        }
-      }
-    `,
-    variables: { categoryId: 990 },  // Example categoryId (you can change this dynamically)
-  });
+    const latestPosts = await fetchGraphQLData("posts", [
+      "id",
+      "slug",
+      "title",
+      "date",
+      "excerpt",
+      "featuredImage { node { sourceUrl altText } }",
+      "author { node { name } }"
+    ]);
 
-  
-  const LatestPostQuery = client.query({
-    query: gql`
-      query GetAllPosts {
-    posts {
-      nodes {
-        id
-        slug
-        title
-        date
-        excerpt
-        featuredImage {
-          node {
-            sourceUrl
-            altText
-          }
-        }
-        author {
-          node {
-            name
-          }
-        }
+    const featuredPost = await fetchGraphQLData("deals", [
+      "id",
+      "title",
+      "content",
+      "date",
+      "featuredImage { node { sourceUrl } }",
+      "acf"
+    ]);
+
+    const popularPosts = await fetchGraphQLData("services", [
+      "id",
+      "title",
+      "content",
+      "date",
+      "slug",
+      "featuredImage { node { sourceUrl } }",
+      "acf"
+    ]);
+
+    return {
+      props: {
+        categories: categories || [],
+        featuredPost: featuredPost || [],
+        popularPosts: popularPosts || [],
+        NewsPosts: newsPosts || [],
+        LatestPost: latestPosts || [],
+      },
+      revalidate: 60, // ISR every 60 seconds
+    };
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return {
+      props: {
+        categories: [],
+        featuredPost: [],
+        popularPosts: [],
+        NewsPosts: [],
+        LatestPost: [],
       }
-    }
+    };
   }
-    `,
-     // Example categoryId (you can change this dynamically)
-  });
-  const featuredPostQuery = client.query({
-    query: gql`
-   query GetDeals {
-    deals {
-      nodes {
-        id
-        title
-        content
-        date
-        featuredImage {
-          node {
-            sourceUrl
-          }  
-        }
-           acf
-      }
-    }
-  }
-    `,
-  });
-
-  const popularPostsQuery = client.query({
-    query: gql`
-      query GetPopularPosts {
-        services {
-          nodes {
-            id
-            title
-            content
-            date
-            slug
-            featuredImage {
-              node {
-                sourceUrl
-              }
-            }
-            acf
-          }
-        }
-      }
-    `,
-  });
-  
-  
-
-  // Parallel fetching
-  const [posts, categories, featuredPost, popularPosts ,NewsPosts,LatestPost] = await Promise.all([
-    postsQuery,
-    categoriesQuery,
-    featuredPostQuery,
-    popularPostsQuery,
-    NewsPostQuery,
-    LatestPostQuery
-  ]);
-
-  return {
-    props: {
-      pageData: posts.data.page, // Pass page data here
-      categories: categories.data.posts.nodes || [],
-      featuredPost: featuredPost.data.deals.nodes,
-      popularPosts: popularPosts.data.services.nodes || [],
-      NewsPosts: NewsPosts.data.posts.nodes || [],
-      LatestPost:LatestPost.data.posts.nodes|| []
-    },
-    revalidate: 60, // ISR every 60 seconds
-  };
 }
-export default function Home({ pageData, categories, featuredPost, popularPosts,NewsPosts,LatestPost }) {
- 
 
-const [activeRoute, setActiveRoute] = useState("Latest");
-const handleRouteClick = (route) => {
-  setActiveRoute(route);
-};
+export default function Home({ categories, featuredPost, popularPosts, NewsPosts, LatestPost }) {
+  const [activeRoute, setActiveRoute] = useState("Latest");
+  const [metaTags, setMetaTags] = useState([]);
+  const [pageTitle, setPageTitle] = useState("WPArena: Ultimate WordPress Resources - Since 2008");
+  const [seoData, setSeoData] = useState(null);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    async function updateSEOData() {
+      const currentPath = router.asPath;
+      const seoResponse = await fetchSEOData(currentPath);
+
+      setSeoData(seoResponse);
+    }
+
+    updateSEOData();
+  }, [router.asPath]);
+
+  useEffect(() => {
+    if (seoData?.head) {
+      const tempDiv = document.createElement("div");
+      tempDiv.innerHTML = seoData.head;
+
+      const extractedTags = Array.from(tempDiv.children).filter(
+        (el) => el.tagName === "META" || el.tagName === "LINK" || el.tagName === "SCRIPT"
+      );
+
+      setMetaTags(extractedTags);
+
+      const ogTitleTag = extractedTags.find((tag) => tag.getAttribute("property") === "og:title");
+
+      if (ogTitleTag) {
+        setPageTitle(ogTitleTag.getAttribute("content"));
+      }
+    }
+  }, [seoData]);
+
   return (
     <>
       <Head>
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet"></link>
-        <title>{pageData.rankMathTitle}</title>
-        <meta name="description" content={pageData.rankMathDescription} />
-        <meta name="keywords" content={pageData.rankMathFocusKeyword} />
+        <title>{pageTitle || "WPArena: Ultimate WordPress Resources - Since 2008"}</title>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet" />
+
+        {metaTags.map((tag, index) => {
+          const TagName = tag.tagName.toLowerCase();
+          return <TagName key={index} {...Object.fromEntries(Array.from(tag.attributes).map(attr => [attr.name, attr.value]))} />;
+        })}
       </Head>
-        
-        <PostList pageData={pageData} />
-        <Routes onRouteClick={handleRouteClick}  />
-        {activeRoute === "Reviews" && <CategoryList categories={categories} />}
-        {activeRoute === "News" && <CategoryList categories={NewsPosts} />}
-        {activeRoute === "Latest" && <CategoryList categories={LatestPost} />}
-        <HostingQuiz/>
-      
-        <PopularPosts services={popularPosts} />
-        <FeaturedPost posts={featuredPost} />
-       
+
+      <PostList />
+      <Routes onRouteClick={setActiveRoute} />
+      {activeRoute === "Reviews" && <CategoryList categories={categories} />}
+      {activeRoute === "News" && <CategoryList categories={NewsPosts} />}
+      {activeRoute === "Latest" && <CategoryList categories={LatestPost} />}
+      <HostingQuiz />
+      <PopularPosts services={popularPosts} />
+      <FeaturedPost posts={featuredPost} />
     </>
   );
 }
