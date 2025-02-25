@@ -1,8 +1,8 @@
 import Image from "next/image";
 
 export default function PostList({ pageData }) {
-  
-  if (!pageData) {
+
+  if (pageData) {
     return <p className="text-red-400">No page data available.</p>;
   }
 

@@ -1,15 +1,15 @@
 import Link from "next/link";
 
 const links = [
-  { name: "News", href: "/News" },
+  { name: "News", href: "/category/news" },
   { name: "Directory", href: "/Directory" },
-  { name: "Tutorials", href: "/Tutorials" },
+  { name: "Tutorials", href: "/category/tutorials" },
   { name: "Deals & Coupons", href: "/DealsCoupons" },
   { name: "Plugins", href: "/Plugin" },
   { name: "Themes", href: "/Themes" },
   { name: "Advertise", href: "/sitemap" },
   { name: "Toolkit", href: "/ProService" },
-  { name: "About Us", href: "/terms" },
+  { name: "About Us", href: "/AboutUs" },
   { name: "Statistics", href: "/Statistics" },
   { name: "Advanced Search", href: "/collection" },
   { name: "Free Blog Setup", href: "/sitemap" },

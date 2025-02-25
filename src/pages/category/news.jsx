@@ -3,33 +3,33 @@ import Image from "next/image";
 import Link from "next/link";
 import { gql } from "@apollo/client";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import client from "../lab/Client";
+import client from "../../lab/Client";
 
 
 // ✅ GraphQL Query
 export const GET_POSTS_BY_CATEGORY = gql`
-  query GetPostsByCategory($categoryId: Int!) {
-    posts(where: { categoryId: $categoryId }) {
-      nodes {
-        id
-        slug
-        title
-        date
-        excerpt
-        featuredImage {
-          node {
-            sourceUrl
-            altText
+ query {
+      posts(where: { categoryName: "news" }) {
+        nodes {
+          id
+          slug
+          title
+          date
+          excerpt
+          featuredImage {
+            node {
+              sourceUrl
+              altText
+            }
           }
-        }
-        author {
-          node {
-            name
+          author {
+            node {
+              name
+            }
           }
         }
       }
     }
-  }
 `;
 
 // ✅ Timeline Component
@@ -58,7 +58,7 @@ const Timeline = ({ posts }) => {
             <div className="space-y-4 w-full">
               {visiblePosts.map((post, index) => (
                 <div key={post.id} className="relative pl-8 lg:pl-36">
-                  <div className="bg-white   overflow-hidden">
+                  <div className="bg-white  overflow-hidden">
                     <div className="flex flex-col lg:flex-row gap-4 p-4 sm:p-6">
                       <div className="w-full lg:w-[400px] h-[200px] relative">
                         {post.featuredImage?.node?.sourceUrl ? (
@@ -77,8 +77,8 @@ const Timeline = ({ posts }) => {
                         <h3 className="text-2xl font-semibold">
                           <Link
                             href={{
-                              pathname: `/post/${post.id}`,
-                              query: { id: post.id },
+                              pathname: `/post/${post.slug}`,
+                             
                             }}
                             className="text-gray-800 hover:text-[#2980b9]"
                           >
@@ -120,7 +120,7 @@ const Timeline = ({ posts }) => {
                     </div>
                   </div>
 
-                  
+                 
                 </div>
               ))}
             </div>
@@ -148,7 +148,7 @@ export async function getStaticProps() {
   try {
     const { data } = await client.query({
       query: GET_POSTS_BY_CATEGORY,
-      variables: { categoryId: 990 },
+      variables: { categoryId: 5 },
     });
 
     return {
