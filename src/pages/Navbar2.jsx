@@ -11,7 +11,7 @@ const ServicesBar = () => {
     { id: 3, ServicesIcon: "/nav3.png", ServicesTitle: "Pro Services", ServicesUrl: "/ProService" },
     { id: 4, ServicesIcon: "/nav4.png", ServicesTitle: "Wp Tutorials", ServicesUrl: "/Tutorials" },
     { id: 5, ServicesIcon: "/nav5.png", ServicesTitle: "Our Themes", ServicesUrl: "/Themes" },
-    { id: 6, ServicesIcon: "/nav7.png", ServicesTitle: "Speed Optimization", ServicesUrl: "#" },
+    { id: 6, ServicesIcon: "/nav7.png", ServicesTitle: "Speed Optimization", ServicesUrl: "/SpeedOptimization" },
   ];
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
