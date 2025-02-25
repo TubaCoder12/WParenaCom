@@ -38,7 +38,7 @@ export default function Navbar() {
         <ul className="hidden lg:flex lg:space-x-6 lg:mx-8  text-[#383838] text-lg font-[500]">
           {[
             { name: "News", path: "/News" },
-            { name: "Tutorials", path: "/tutorials" },
+            { name: "Tutorials", path: "/Tutorials" },
             { name: "Reviews", path: "/Reviews" },
             { name: "Comparison", path: "/comparison" },
             { name: "Resources", path: "/resources" },
