@@ -1,6 +1,8 @@
 import Image from "next/image";
 
 export default function FeaturedPosts({ posts }) {
+  console.log(posts, 'sjasjk');
+  
   if (!posts || posts.length === 0) return <p>No posts available</p>;
  
 
