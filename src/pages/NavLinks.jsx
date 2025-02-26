@@ -13,10 +13,7 @@ const links = [
   { name: "Statistics", href: "/Statistics" },
   { name: "Advanced Search", href: "/category/collection" },
   { name: "Free Blog Setup", href: "/service/wordpress-installation-service" },
-  { name: "Contact", href: "/privacy-policy" },
- 
-
-                    
+  { name: "Contact", href: "/ContactForm" },         
 ];
 
 export default function NavLinks() {
