@@ -3,7 +3,7 @@
  import Image from 'next/image'; // If using Next.js
  import Link from 'next/link';
  import { AiOutlineLoading3Quarters } from 'react-icons/ai'; // If using react-icons
-  export default function  CategoryList  ({ categories })  {
+export default function  CategoryList  ({ categories })  {
 
   const [visibleBlogs, setVisibleBlogs] = useState(5);
 
