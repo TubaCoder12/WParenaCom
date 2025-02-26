@@ -1,3 +1,4 @@
+import api from "@/api";
 import { fetchPosts } from '@/lib/fetchPosts';
 import FeaturedPost from "@/Component/FeaturedPost";
 import PostList from "@/Component/PostList";
@@ -16,11 +17,11 @@ export async function getStaticProps() {
       featuredDeals,
       popularServices
     ] = await Promise.all([
-      fetchPosts("GetPostsByCategory", "reviews", "posts"),
-      fetchPosts("GetPostsByCategory", "news", "posts"),
-      fetchPosts("GetAllPosts", null, "posts"),
-      fetchPosts("GetDeals", null, "deals", true),
-      fetchPosts("GetPopularPosts", null, "services", true),
+      fetchPosts(api.post.query.getByCategory, api.post.endpoint.reviews, api.post.endpoint.posts),
+      fetchPosts(api.post.query.getByCategory, "news", api.post.endpoint.posts),
+      fetchPosts(api.post.query.getAllPosts, null, api.post.endpoint.latest),
+      fetchPosts(api.post.query.getDeals, null, api.post.endpoint.deals, true),
+      fetchPosts(api.post.query.getPopularPosts, null, api.post.endpoint.services, true),
     ]);
 
     return {
@@ -58,8 +59,8 @@ export default function Home({ categories, featuredDeals, popularServices, newsP
       {activeRoute === "News" && <CategoryList categories={newsPosts} />}
       {activeRoute === "Latest" && <CategoryList categories={latestPosts} />}
       <HostingQuiz />
-      <PopularPosts services={featuredDeals} />
-      <FeaturedPost posts={popularServices} />
+      <PopularPosts services={popularServices} />
+      <FeaturedPost posts={featuredDeals} />
     </>
   );
 }
