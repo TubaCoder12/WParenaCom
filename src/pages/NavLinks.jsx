@@ -4,7 +4,7 @@ const links = [
   { name: "News", href: "/category/news" },
   { name: "Directory", href: "/Directory" },
   { name: "Tutorials", href: "/category/tutorials" },
-  { name: "Deals & Coupons", href: "/DealsCoupons" },
+  { name: "Deals & Coupons", href: "/component/FeaturedPost" },
   { name: "Plugins", href: "/Plugin" },
   { name: "Themes", href: "/Themes" },
   { name: "Advertise", href: "/sitemap" },
@@ -12,7 +12,7 @@ const links = [
   { name: "About Us", href: "/AboutUs" },
   { name: "Statistics", href: "/Statistics" },
   { name: "Advanced Search", href: "/collection" },
-  { name: "Free Blog Setup", href: "/sitemap" },
+  { name: "Free Blog Setup", href: "/Free-blog-setup" },
   { name: "Contact", href: "/privacy-policy" },
  
 
