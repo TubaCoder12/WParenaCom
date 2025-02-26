@@ -1,36 +1,9 @@
+"use client"
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { gql } from "@apollo/client";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import client from "../lab/Client";
-
-
-// ✅ GraphQL Query
-export const GET_POSTS_BY_CATEGORY = gql`
-  query GetPostsByCategory($categoryId: Int!) {
-    posts(where: { categoryId: $categoryId }) {
-      nodes {
-        id
-        slug
-        title
-        date
-        excerpt
-        featuredImage {
-          node {
-            sourceUrl
-            altText
-          }
-        }
-        author {
-          node {
-            name
-          }
-        }
-      }
-    }
-  }
-`;
+import fetchGraphQLData from '@/lib/graphqlFetcher';
 
 // ✅ Timeline Component
 const Timeline = ({ posts }) => {
@@ -40,7 +13,7 @@ const Timeline = ({ posts }) => {
 
   return (
     <>
-      <div className="font-bold text-4xl mt-4 ml-28">Hosting</div>
+      <div className="font-bold text-4xl mt-4 ml-28">News</div>
    
     <section className="relative  sm:py-20 px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
      
@@ -77,8 +50,8 @@ const Timeline = ({ posts }) => {
                         <h3 className="text-2xl font-semibold">
                           <Link
                             href={{
-                              pathname: `/post/${post.slug}`,
-                              
+                              pathname: `/${post.slug}`,
+                             
                             }}
                             className="text-gray-800 hover:text-[#2980b9]"
                           >
@@ -94,7 +67,7 @@ const Timeline = ({ posts }) => {
                               alt="share-icon"
                               width={15}
                               height={15}
-                              className="ml-2 bg-[#297fba] p-0.5 rounded-sm"
+                              className="ml-2 bg-[#297fba] p-1 rounded-sm"
                             />
                           </span>
                         </p>
@@ -120,7 +93,7 @@ const Timeline = ({ posts }) => {
                     </div>
                   </div>
 
-                  
+                 
                 </div>
               ))}
             </div>
@@ -146,14 +119,19 @@ const Timeline = ({ posts }) => {
 // ✅ getStaticProps
 export async function getStaticProps() {
   try {
-    const { data } = await client.query({
-      query: GET_POSTS_BY_CATEGORY,
-      variables: { categoryId: 1062 },
-    });
+    const posts = await fetchGraphQLData("posts", [
+      "id",
+      "slug",
+      "title",
+      "date",
+      "excerpt",
+      "featuredImage { node { sourceUrl altText } }",
+      "author { node { name } }"
+    ], { categoryName: "news" });
 
     return {
       props: {
-        posts: data.posts.nodes || [],
+        posts: posts || [],
       },
       revalidate: 86400, // ✅ Revalidate after 24 hours
     };

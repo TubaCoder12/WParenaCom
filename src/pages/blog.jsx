@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { gql } from "@apollo/client";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import client from "../lab/Client";
+import client from "@/lib/apolloClient";
 
 // ✅ GraphQL Query for Latest Posts
 export const GET_ALL_POSTS = gql`
@@ -76,7 +76,7 @@ const Timeline = ({ posts }) => {
                       <h3 className="text-2xl font-semibold">
                         <Link
                           href={{
-                            pathname: `/post/${post.slug}`,
+                            pathname: `/${post.slug}`,
                             
                           }}
                           className="text-gray-800 hover:text-[#2980b9]"

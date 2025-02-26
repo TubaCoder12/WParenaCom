@@ -3,33 +3,34 @@ import Image from "next/image";
 import Link from "next/link";
 import { gql } from "@apollo/client";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import client from "../lab/Client";
+import client from "@/lib/apolloClient";
+
 
 
 // ✅ GraphQL Query
 export const GET_POSTS_BY_CATEGORY = gql`
-  query GetPostsByCategory($categoryId: Int!) {
-    posts(where: { categoryId: $categoryId }) {
-      nodes {
-        id
-        slug
-        title
-        date
-        excerpt
-        featuredImage {
-          node {
-            sourceUrl
-            altText
+ query {
+      posts(where: { categoryName: "collections" }) {
+        nodes {
+          id
+          slug
+          title
+          date
+          excerpt
+          featuredImage {
+            node {
+              sourceUrl
+              altText
+            }
           }
-        }
-        author {
-          node {
-            name
+          author {
+            node {
+              name
+            }
           }
         }
       }
     }
-  }
 `;
 
 // ✅ Timeline Component
@@ -40,7 +41,7 @@ const Timeline = ({ posts }) => {
 
   return (
     <>
-      <div className="font-bold text-4xl mt-4 ml-28">Tutorials</div>
+      <div className="font-bold text-4xl mt-4 ml-28">collections</div>
    
     <section className="relative  sm:py-20 px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
      
@@ -77,7 +78,7 @@ const Timeline = ({ posts }) => {
                         <h3 className="text-2xl font-semibold">
                           <Link
                             href={{
-                              pathname: `/post/${post.slug}`,
+                              pathname: `/${post.slug}`,
                              
                             }}
                             className="text-gray-800 hover:text-[#2980b9]"

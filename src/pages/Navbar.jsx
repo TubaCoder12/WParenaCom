@@ -37,12 +37,12 @@ export default function Navbar() {
         </Link>
         <ul className="hidden lg:flex lg:space-x-6 lg:mx-8  text-[#383838] text-lg font-[500]">
           {[
-            { name: "News", path: "/News" },
-            { name: "Tutorials", path: "/tutorials" },
-            { name: "Reviews", path: "/Reviews" },
-            { name: "Comparison", path: "/comparison" },
-            { name: "Resources", path: "/resources" },
-            { name: "Collection", path: "/collection" },
+            { name: "News", path: "/category/news" },
+            { name: "Tutorials", path: "/category/tutorials" },
+            { name: "Reviews", path: "/category/reviews" },
+            { name: "Comparison", path: "/category/camparison" },
+            { name: "Resources", path: "/category/resources" },
+            { name: "Collection", path: "/category/collection" },
            
           ].map((item, index) => (
             <li

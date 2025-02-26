@@ -1,11 +1,6 @@
 import Image from "next/image";
 
 export default function PostList({ pageData }) {
-  
-  if (!pageData) {
-    return <p className="text-red-400">No page data available.</p>;
-  }
-
   return (
     <section
       style={{ backgroundImage: `url("/homebanner-watermark.png")` }}
@@ -18,7 +13,7 @@ export default function PostList({ pageData }) {
           16 Years of Passion & Expertise
           </h1>
           <p className="text-center text-gray-700 sm:text-left font-medium mt-4 lg:mt-8 text-sm md:text-base lg:text-xl">
-            {pageData?.rankMathDescription || "Default Description"}
+            {pageData?.rankMathDescription || "Unlock a World of WordPress: Your Ultimate Hub for Themes, Plugins, and Tutorials for Every Need."}
           </p>
           <div className="mt-4 lg:mt-8">
   <form className="relative w-full sm:w-2/3 md:w-[400px] lg:w-[600px]">

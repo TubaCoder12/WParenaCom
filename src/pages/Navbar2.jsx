@@ -6,12 +6,12 @@ import ServicesIcon from "../../public/services-bar-icon.png";
 
 const ServicesBar = () => {
   const MyServicesData = [
-    { id: 1, ServicesIcon: "/nav1.png", ServicesTitle: "WordPress Blog", ServicesUrl: "/WordpressBlog" },
-    { id: 2, ServicesIcon: "/nav2.png", ServicesTitle: "WordPress Hosting", ServicesUrl: "/Hosting" },
-    { id: 3, ServicesIcon: "/nav3.png", ServicesTitle: "Pro Services", ServicesUrl: "/ProService" },
-    { id: 4, ServicesIcon: "/nav4.png", ServicesTitle: "Wp Tutorials", ServicesUrl: "/Tutorials" },
-    { id: 5, ServicesIcon: "/nav5.png", ServicesTitle: "Our Themes", ServicesUrl: "/Themes" },
-    { id: 6, ServicesIcon: "/nav7.png", ServicesTitle: "Speed Optimization", ServicesUrl: "#" },
+    { id: 1, ServicesIcon: "/nav1.png", ServicesTitle: "WordPress Blog", ServicesUrl: "/blog" },
+    { id: 2, ServicesIcon: "/nav2.png", ServicesTitle: "WordPress Hosting", ServicesUrl: "/category/reviews/hosting" },
+    { id: 3, ServicesIcon: "/nav3.png", ServicesTitle: "Pro Services", ServicesUrl: "/services" },
+    { id: 4, ServicesIcon: "/nav4.png", ServicesTitle: "Wp Tutorials", ServicesUrl: "/category/tutorials" },
+    { id: 5, ServicesIcon: "/nav5.png", ServicesTitle: "Our Themes", ServicesUrl: "/themes" },
+    { id: 6, ServicesIcon: "/nav7.png", ServicesTitle: "Speed Optimization", ServicesUrl: "/service/wordpress-optimization-service" },
   ];
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
