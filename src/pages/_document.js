@@ -1,5 +1,6 @@
 import { Html, Head, Main, NextScript } from "next/document";
 import Footer from "./Footer";
+import Patners from "./Patner";
 
 export default function Document() {
   
@@ -9,6 +10,7 @@ export default function Document() {
       <body className="antialiased">
         <Main />
         <NextScript />
+        <Patners/>
         <Footer/>
       </body>
     </Html>

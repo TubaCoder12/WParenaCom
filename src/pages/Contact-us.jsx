@@ -56,7 +56,7 @@ const ContactForm = () => {
                 </form>
 
             </div>
-            <Partner />
+           
         </div>
     )
 }

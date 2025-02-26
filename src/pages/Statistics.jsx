@@ -6,6 +6,8 @@ import Link from "next/link";
 import { gql } from "@apollo/client";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import client from "@/lib/apolloClient";
+import StatisticsBoxes from "./StatisticBox";
+import ApexChart from "./ApexChart";
 
 
 const stats = [
@@ -55,26 +57,13 @@ const Timeline = ({ posts }) => {
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel cupiditate cumque totam fugiat ad inventore nesciunt, dolore quibusdam veniam saepe ea recusandae ipsum quaerat vero vitae, soluta repellendus voluptatum obcaecati? Sapiente, iste eius? Laborum in dolorem cupiditate soluta et, omnis, deserunt excepturi praesentium dolor maxime deleniti. Qui voluptatem, inventore perspiciatis voluptates, cum sunt voluptate nam ipsum nostrum, vel quia sapiente?
         </p>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 p-6 pt-12 max-w-full mx-24  ">
-        {stats.map((stat, index) => (
-          <div
-            key={index}
-            className="bg-[#ebf1ff] px-10 py-16 rounded-lg  text-center  "
-          >  
-            <div className="bg-[#2980b9] rounded-full lg:w-36 lg:h-36 flex items-center justify-center mx-auto mb-3  ">
-  <Image src={stat.icon} alt={stat.label} width={80} height={80}
-  className="p-2" />
+       <StatisticsBoxes/>
+       <div className="bg-[#333333] rounded-md max-w-[1670px] w-full mx-auto px-4 sm:px-6 lg:px-8">
+    <p className="text-white p-4 sm:p-6 text-lg sm:text-2xl font-bold ">
+        MOST VISITED BLOGS
+    </p>
 </div>
 
-            
-            <h3 className="text-5xl font-bold text-gray-900 mt-8">{stat.value}</h3>
-            <p className="text-gray-600 mt-2 text-[20px] font-bold">{stat.label}</p>
-          </div>
-        ))}
-      </div>
-      <div className="bg-[#333333] rounded-md w-[1670px] mx-auto">
-        <p className="text-white p-6 text-2xl font-bold">MOST VISITED BLOGS</p>
-      </div>
       
    
       <section className="relative  sm:py-20 px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
@@ -173,6 +162,7 @@ const Timeline = ({ posts }) => {
          </div>
        )}
      </div>
+     <ApexChart/>
    </section>
     </>
   );

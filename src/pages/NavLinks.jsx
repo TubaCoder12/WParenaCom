@@ -7,13 +7,13 @@ const links = [
   { name: "Deals & Coupons", href: "/DealsCoupons" },
   { name: "Plugins", href: "/Plugin" },
   { name: "Themes", href: "/themes" },
-  { name: "Advertise", href: "/sitemap" },
+  { name: "Advertise", href: "/advertise" },
   { name: "Toolkit", href: "/services" },
   { name: "About Us", href: "/AboutUs" },
   { name: "Statistics", href: "/Statistics" },
   { name: "Advanced Search", href: "/category/collection" },
   { name: "Free Blog Setup", href: "/service/wordpress-installation-service" },
-  { name: "Contact", href: "/ContactForm" },         
+  { name: "Contact", href: "/Contact-us" },         
 ];
 
 export default function NavLinks() {
