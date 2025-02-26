@@ -2,7 +2,7 @@ import { GraphQLClient, gql } from "graphql-request";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import sanitizeHtml from "sanitize-html";
-import SocialShare from "../BlogSocialIcons";
+import SocialShare from "./BlogSocialIcons";
 
 const GET_POST_BY_ID = gql`
   query GetPostByID($slug: ID!) {
