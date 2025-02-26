@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { GraphQLClient, gql } from "graphql-request";
 import Image from "next/image";
-import ServiceSocial from "./ServiceSocial";
+import ServiceSocial from "../ServiceSocial";
 
 
 const GET_SERVICE_BY_SLUG = gql`
@@ -81,7 +81,7 @@ const ServiceDetails = ({ service, error }) => {
 
 export async function getStaticProps() {
   const client = new GraphQLClient(endpoint);
-  const slug = "wordpress-installation-service"; 
+  const slug = "wordpress-optimization-service"; // ❗ Ye slug manually specify kar do
 
   try {
     const data = await client.request(GET_SERVICE_BY_SLUG, { slug });

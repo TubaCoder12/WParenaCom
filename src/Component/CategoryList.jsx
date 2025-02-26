@@ -44,7 +44,7 @@ export default function  CategoryList  ({ categories })  {
                       </div>
                       <div className="flex flex-col space-y-4 flex-1 ml-8">
                         <h3 className="text-2xl font-semibold">
-                          <Link href={`/post/ ${post.slug}`}
+                          <Link href={`/${post.slug}`}
                             
                             className="text-gray-800 hover:text-[#2980b9]"
                             >

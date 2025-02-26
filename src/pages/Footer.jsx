@@ -35,14 +35,14 @@ export default function Footer() {
         ))}
       </div>
 
-      <hr className="border-gray-500 w-full max-w-4xl mx-auto" />
+      <hr className="border-gray-500 w-full max-w-8xl mx-auto" />
 
       {/* Footer Links */}
       <div className="my-6">
         <NavLinks />
       </div>
 
-      <hr className="border-gray-500 w-full max-w-4xl mx-auto" />
+      <hr className="border-gray-500 w-full max-w-8xl mx-auto" />
 
       {/* Copyright */}
       <div className="text-center text-gray-100 text-xs pt-5 px-4">
