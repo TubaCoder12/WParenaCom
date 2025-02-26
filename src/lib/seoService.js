@@ -3,7 +3,7 @@ import config from '@/config';
 export const fetchSEOData = async (currentPath) => {
     try {
         const apiUrl = `${config.RANKMATH_API_URL}?url=${config.BASE_URL}${currentPath}`;
-
+        
         const response = await fetch(apiUrl, {
             method: "GET",
             headers: {

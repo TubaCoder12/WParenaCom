@@ -2,36 +2,8 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { gql } from "@apollo/client";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import client from "@/lib/apolloClient";
-
-
-// ✅ GraphQL Query
-export const GET_POSTS_BY_CATEGORY = gql`
- query {
-      posts(where: { categoryName: "news" }) {
-        nodes {
-          id
-          slug
-          title
-          date
-          excerpt
-          featuredImage {
-            node {
-              sourceUrl
-              altText
-            }
-          }
-          author {
-            node {
-              name
-            }
-          }
-        }
-      }
-    }
-`;
+import fetchGraphQLData from '@/lib/graphqlFetcher';
 
 // ✅ Timeline Component
 const Timeline = ({ posts }) => {
@@ -147,14 +119,19 @@ const Timeline = ({ posts }) => {
 // ✅ getStaticProps
 export async function getStaticProps() {
   try {
-    const { data } = await client.query({
-      query: GET_POSTS_BY_CATEGORY,
-      variables: { categoryId: 5 },
-    });
+    const posts = await fetchGraphQLData("posts", [
+      "id",
+      "slug",
+      "title",
+      "date",
+      "excerpt",
+      "featuredImage { node { sourceUrl altText } }",
+      "author { node { name } }"
+    ], { categoryName: "news" });
 
     return {
       props: {
-        posts: data.posts.nodes || [],
+        posts: posts || [],
       },
       revalidate: 86400, // ✅ Revalidate after 24 hours
     };

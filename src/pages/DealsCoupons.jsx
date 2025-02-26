@@ -40,7 +40,6 @@ export async function getServerSideProps() {
 }
 
 export default function FeaturedPosts({ posts }) {
-  console.log("Rendered Posts:", posts);
 
   if (!posts || posts.length === 0) return <p>No posts available</p>;
 
