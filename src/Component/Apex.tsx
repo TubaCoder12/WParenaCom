@@ -52,12 +52,12 @@ const Apex = ({ title, subtitle, seriesData, categories, yAxisMin, yAxisMax }) =
   return (
     <>
     
-    <div className="w-full max-w-lg mx-auto p-4 bg-white  rounded-lg">
-    <h3 className="text-2xl font-semibold bg-[#ebf1ff] p-4 rounded-md ">{title}</h3>
+    <div className="w-full max-w-[1600px] mx-auto p-4 bg-white  rounded-lg">
+  
       {/* 🏷 Chart Title */}
-      <div className="flex justify-between items-center mb-4">
-       
-        <h3 className="text-gray-600">{subtitle}</h3>
+      <div className="flex justify-between items-center mb-4  bg-[#ebf1ff]">
+      <h3 className="text-2xl font-semibold bg-[#ebf1ff] p-4 rounded-md ">{title}</h3>
+        <h3 className="text-gray-600 p-6 font-semibold text-2xl">{subtitle}</h3>
       </div>
 
       {/* 📊 Chart Render */}

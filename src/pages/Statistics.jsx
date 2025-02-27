@@ -8,6 +8,7 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import client from "@/lib/apolloClient";
 import StatisticsBoxes from "./StatisticBox";
 import ApexChart from "./ApexChart";
+import ApexChart2 from "./ApexChart2";
 
 
 const stats = [
@@ -163,6 +164,9 @@ const Timeline = ({ posts }) => {
        )}
      </div>
      <ApexChart/>
+     <div>
+      <ApexChart2/>
+     </div>
    </section>
     </>
   );
